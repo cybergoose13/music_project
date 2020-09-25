@@ -37,7 +37,7 @@ def register(request):
     
     if len(errors) > 0:
         print("There are errors with the registration")
-        fpr key, value in errors.items():
+        for key, value in errors.items():
             messages.error(request,value)
             return redirect('/')
         
