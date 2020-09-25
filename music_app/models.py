@@ -55,12 +55,15 @@ class RegisterManager(models.Manager):
 
     def loginValidation(self, postData):
         errors= {}
-        if len(User.objects.filter(user_email= postData['user_email'])) > 5:
+        print(postData['user_pass'] + ' ' + postData['user_email'])
+        
+        if len(User.objects.filter(user_email= postData['user_email'])) == 0:
             print('email not found. . .')
             errors['LOGIN_ERROR']= 'Invalid login credentials.'
-        if not bcrypt.checkpw(postData['user_pass'].encode(), User.objects.get(user_email= postData['user_email']).password.encode()):
-            print('password did not match')
-            errors['LOGIN_ERROR']= 'Invalid login credentials.'
+        else:
+            if not bcrypt.checkpw(postData['user_pass'].encode(), User.objects.get(user_email= postData['user_email']).password.encode()):
+                print('password did not match')
+                errors['LOGIN_ERROR']= 'Invalid login credentials.'
         return errors
 
 class Post(models.Model):

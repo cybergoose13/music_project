@@ -40,7 +40,7 @@ def register(request):
             print("There are errors with the registration")
             for key, value in errors.items():
                 messages.error(request,value)
-                return redirect('/')
+                return redirect('/abc')
             
         else:
             print("Registration successful")
@@ -87,9 +87,10 @@ def login(request):
     
         else:
             # Check email in database
-            user_list = User.objects.filter(email=request.POST['email'])
+            # user_list = User.objects.filter(email=request.POST['user_email'])
+            user_list= User.objects.get(user_email= request.POST['user_email'])
             # setup user in session
-            request.session['uuid'] = user_list[0].id
+            request.session['uuid'] = user_list.id
             return redirect('/dashboard')
     else:
         return render(request, 'login.html')
