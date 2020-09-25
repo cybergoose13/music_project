@@ -7,42 +7,6 @@ body, html{
     height: 100%;
     width: 100%;
 }
-/* .splash{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: black;
-    z-index: 200;
-    color: white;
-    display: flex;
-    justify-items: center;
-}
-.splash.display-non{
-    position: fixed;
-    opacity: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: black;
-    z-index: -10;
-    display: flex;
-    justify-items: center;
-    transition: all 0.3s;
-}
-@keyframes fadeIn{
-    0% {opacity:0;}
-    100% {opacity:1;}
-}
-
-.fade-in{
-    opacity: 0;
-    animation: fadeIn 1s ease-in forwards;
-    width: 500px;
-    height: 500px;
-} */
 .main{
     background-image: url(hotwired.jpg);
     background-position: center;

@@ -17,41 +17,43 @@
     <script rel="stylesheet" href="{%static '/js/music.js' %}"></script>
 </head>
 <body>
-    <div class="outerreg">
-        <form action="register" method="post">
-            {% csrf_token %}
-            <div>
-                <label for="first_name">
-                    <input type="text" name="first_name" placeholder="" required>
-                </label>
-            </div>
-            <div>
-                <label for="last_name">
-                    <input type="text" name="last_name" required>
-                </label>
-            </div>
-            <div>
-                <label for="email">
-                    <input type="text" name="email" required>
-                </label>
-            </div>
-            <div>
-                <label for="user_name">
-                    <input type="text" name="user_name" required>
-                </label>
-            </div>
-            <div>
-                <label for="password">
-                    <input type="text" name="user_pass" required>
-                </label>
-            </div>
-            <div>
-                <label for="confirm_pass">
-                    <input type="text" name="confirm_pass" required>
-                </label>
-            </div>
-            <button type="submit" value="register" class="btn btn-danger">Register</button>
-        </form>
+    <div class="main">
+        <div class="outerreg">
+            <form action="register" method="post">
+                {% csrf_token %}
+                <div>
+                    <label for="first_name">
+                        <input type="text" name="first_name" placeholder="" required>
+                    </label>
+                </div>
+                <div>
+                    <label for="last_name">
+                        <input type="text" name="last_name" required>
+                    </label>
+                </div>
+                <div>
+                    <label for="email">
+                        <input type="text" name="email" required>
+                    </label>
+                </div>
+                <div>
+                    <label for="user_name">
+                        <input type="text" name="user_name" required>
+                    </label>
+                </div>
+                <div>
+                    <label for="password">
+                        <input type="text" name="user_pass" required>
+                    </label>
+                </div>
+                <div>
+                    <label for="confirm_pass">
+                        <input type="text" name="confirm_pass" required>
+                    </label>
+                </div>
+                <button type="submit" value="register" class="btn btn-danger">Register</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
