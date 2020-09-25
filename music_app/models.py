@@ -73,8 +73,7 @@ class RegisterManager(models.Manager):
 
 class Post(models.Model):
     post= models.CharField(max_length= 255)
-    posted_by= models.ForeignKey('User', related_name='post', on_delete= models.CASCADE)
-
+    posted_by= models.ForeignKey('User', related_name='post', on_delete=models.CASCADE)
     created_at= models.DateTimeField(auto_now_add= True)
     updated_at= models.DateTimeField(auto_now= True)
     objects= PostManager()
