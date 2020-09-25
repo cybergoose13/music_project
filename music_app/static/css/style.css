@@ -62,21 +62,30 @@ img{
 h1{
     font-family: fantasy;
 }
-.main3{
-    background-image: url(hotwired.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-    padding: 110px;
+#bg {
+    position: fixed; 
+    top: -50%; 
+    left: -50%; 
+    width: 200%; 
+    height: 200%;
 } 
+  #bg img {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    margin: auto; 
+    min-width: 50%;
+    min-height: 50%;
+  }
 .jumbotron{
     border-radius: 0px 0px 10px 10px;
     background-color: rgb(0, 0, 0, 0.7);
 }
 .navbar{
     opacity 0.4;
+    
 }
 p{
     color: white;
@@ -91,4 +100,34 @@ h1{
 nav{
     display: flex;
     align-content: flex-start;
+    background-color: rgb(0, 0, 0, 0.7);
+    position: absolute;    
+}
+.main3{
+    position: relative;
+    
+}
+.polaroid {
+    width: 20%;
+    background-color: hsl(0, 0%, 10%);
+    box-shadow: 0 4px 20px 0 rgba(253, 253, 253, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 120px;
+}
+  
+.container {
+    text-align: center;
+    padding: 10px 20px;
+}
+.articles{
+    padding: 15px;
+}
+.muse{
+    display: block;
+}
+h3{
+    color: #DC3545;
+}
+.card{
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
