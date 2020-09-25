@@ -7,3 +7,6 @@ def login(request):
 
     }
     return render(request, 'login.html', context)
+
+def register(request):
+    return render(request, 'register.html')
