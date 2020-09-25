@@ -33,3 +33,29 @@ img{
     height: 300px;
     background-color: rgb(0, 0, 0, 0.7);
 }
+.main2{
+    background-image: url(hotwired.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    padding: 100px; 
+}
+.reg{
+    width: 300px;
+    height: 100px;
+    display: block;
+    margin: auto;
+    padding: 15px;
+    text-align: center;
+}
+.outerreg{
+    display: block;
+    margin: auto;
+}
+#img{
+    width: 270px;
+    height: 300px;
+    background-color: rgb(0, 0, 0, 0.7);
+}

@@ -17,42 +17,51 @@
     <script rel="stylesheet" href="{%static '/js/music.js' %}"></script>
 </head>
 <body>
-    <div class="main">
-        <div class="outerreg">
-            <form action="register" method="post">
-                {% csrf_token %}
-                <div>
-                    <label for="first_name">
-                        <input type="text" name="first_name" placeholder="" required>
-                    </label>
-                </div>
-                <div>
-                    <label for="last_name">
-                        <input type="text" name="last_name" required>
-                    </label>
-                </div>
-                <div>
-                    <label for="email">
-                        <input type="text" name="email" required>
-                    </label>
-                </div>
-                <div>
-                    <label for="user_name">
-                        <input type="text" name="user_name" required>
-                    </label>
-                </div>
-                <div>
-                    <label for="password">
-                        <input type="text" name="user_pass" required>
-                    </label>
-                </div>
-                <div>
-                    <label for="confirm_pass">
-                        <input type="text" name="confirm_pass" required>
-                    </label>
-                </div>
-                <button type="submit" value="register" class="btn btn-danger">Register</button>
-            </form>
+    <div class="main2">
+        <div class="reg">
+            <div class="outerreg">
+                <h1 class="text-danger">Register</h1>
+                <img id="img2" src="{% static 'css/hotwiredlogo.png'%}" alt="picture">
+                <form action="register" method="post" class="shadow-lg p-3 mb-5 bg-white rounded">
+                    {% csrf_token %}
+                    <div>
+                        <label for="first_name">
+                            <input type="text" name="first_name" placeholder="First name" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="last_name">
+                            <input type="text" name="last_name" placeholder="Last name" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="email">
+                            <input type="text" name="email" placeholder="Email" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="user_name">
+                            <input type="text" name="user_name" placeholder="Username" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="password">
+                            <input type="text" name="user_pass" placeholder="Password" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="confirm_pass">
+                            <input type="text" name="confirm_pass" placeholder="Confirm Password" required>
+                        </label>
+                    </div>
+                    <button type="submit" value="register" class="btn btn-danger">Register</button>
+                </form>
+                <ul>
+                    {% for error in logerrors %}
+                        <li>{{error}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </body>
