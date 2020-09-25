@@ -1,0 +1,47 @@
+*{
+    margin: auto;
+    padding: 0px;
+    font-family: fantasy;
+}
+.splash{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    z-index: 200;
+    color: white;
+    display: flex;
+    justify-items: center;
+}
+.splash.display-non{
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    z-index: -10;
+    display: flex;
+    justify-items: center;
+    transition: all 0.5s;
+}
+@keyframes fadeIn{
+    to{
+        opacity: 1;
+    }
+}
+.fade-in{
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+}
+.background img{
+    height: auto;
+    width: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;   
+}
