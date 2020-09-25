@@ -27,8 +27,11 @@ class PostManager(models.Manager):
             for idx, track in enumerate(result['tracks']['items']):
                 print(idx,track['name'],track['artists'][0]['name'], track['album']['images'][0]['url'])
                 if track['artists'][0]['name'] == artist:
+                    if len(track['album']['images'][0]['url']) < 1:
+                        songData['album_image']= 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3ANo_image_available.svg&psig=AOvVaw0ZNBmR4B252FDFxX07YghM&ust=1601132642833000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCODF64bKhOwCFQAAAAAdAAAAABAD'
+                    else:
+                        songData['album_image']= track['album']['images'][0]['url']
                     print('Match was found')
-                    songData['album_image']= track['album']['images'][0]['url']
                     songData['artist_name']= artist
                     songData['song_name']= song
                     break
