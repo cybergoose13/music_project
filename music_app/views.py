@@ -55,7 +55,8 @@ def register(request):
         created_user = User.objects.create(
             first_name = request.POST['first_name'],
             last_name = request.POST['last_name'],
-            email = request.POST['email'],
+            user_name = request.POST['user_name'],
+            user_email = request.POST['email'],
             password = hash_slinging_slasher
             # This will scramble the password and make it encrypted
         )
@@ -74,19 +75,22 @@ def logout(request):
 def login(request):
     print(f"our post data is {request.POST}")
     # Check password through validator
-    errors = User.objects.loginValidation(request.POST)
-    if len(errors) > 0:
-        print("There are errors in the login")
-        for key, value in errors.item():
-            messages.error(request, value)
-        return redirect('/')
+    if len(request.POST) > 0:
+        errors = User.objects.loginValidation(request.POST)
+        if len(errors) > 0:
+            print("There are errors in the login")
+            for key, value in errors.item():
+                messages.error(request, value)
+            return redirect('/')
     
+        else:
+            # Check email in database
+            user_list = User.objects.filter(email=request.POST['email'])
+            # setup user in session
+            request.session['uuid'] = user_list[0].id
+            return redirect('/dashboard')
     else:
-        # Check email in database
-        user_list = User.objects.filter(email=request.POST['email'])
-        # setup user in session
-        request.session['uuid'] = user_list[0].id
-        return redirect('/dashboard')
+        return render(request, 'login.html')
 
 # This is to be able to delete the post
 def delete_post(request, post_text_id):
