@@ -1,4 +1,7 @@
 from django.db import models
+from email.message import EmailMessage
+from spotipy.oauth2 import SpotifyClientCredentials
+import spotipy
 import smtplib
 import bcrypt
 import re
@@ -6,9 +9,13 @@ import re
 
 class PostManager(models.Manager):
     def postValidation(self, postData):
+        CLIENT_ID= 'f08fd973a07f4ba8849f5109c963b460'
+        CLIENT_SECRET= '544cb114d54e47da8a6bedd7a412fb7f'
+        auth_manager= SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
+        sp= spotipy.Spotify(auth_manager= auth_manager)
         errors= {}
         if len(postData) > 0:
-
+            
             return errors
 
 class RegisterManager(models.Manager):
@@ -65,6 +72,26 @@ class RegisterManager(models.Manager):
                 print('password did not match')
                 errors['LOGIN_ERROR']= 'Invalid login credentials.'
         return errors
+
+    def resetPassword(self, postData):
+        user= User.objects.get(user_email= postData['user_email'])
+        from_= 'cyberhack.inc@gmail.com'
+        acc_pass= 'hzkbqnofoipuskgqk'
+        to= user.user_email
+        subject= 'Password Reset'
+        body= 'Test'
+
+        msg= EmailMessage()
+        msg.set_content(body)
+        msg['subject']= subject
+        msg['to']= to
+        msg['from']= from_
+
+        server= smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(from_, acc_pass)
+        server.send_message(msg)
+        server.quit()
 
 class Post(models.Model):
     post_text = models.CharField(max_length= 255)

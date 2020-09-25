@@ -40,7 +40,7 @@ def register(request):
             print("There are errors with the registration")
             for key, value in errors.items():
                 messages.error(request,value)
-                return redirect('/abc')
+                return render(request, 'register.html', {'logerrors': errors.values()})
             
         else:
             print("Registration successful")
@@ -81,9 +81,9 @@ def login(request):
         errors = User.objects.loginValidation(request.POST)
         if len(errors) > 0:
             print("There are errors in the login")
-            for key, value in errors.item():
+            for key, value in errors.items():
                 messages.error(request, value)
-            return redirect('/')
+            return render(request, 'login.html', {'logerrors': errors.values()})
     
         else:
             # Check email in database
@@ -145,3 +145,6 @@ def dislike_post(request, post_text_id):
 
 
 # This is the end of the URLS for REDIRECTING
+
+def passReset(request, user_id):
+    pass
