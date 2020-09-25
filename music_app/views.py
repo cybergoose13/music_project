@@ -103,7 +103,7 @@ def add_post(request):
         print("Something went wrong when adding this post")
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect(f'/dashboard/{this_post.id}')
+        return redirect(f'/dashboard')
     this_user = User.objects.get(id=request.session['uuid'])
     share_your_idea = Post.objects.create(
         post_text = request.POST['post_text'],
@@ -130,7 +130,7 @@ def all_posts(request, post_text_id):
 # This is to be able to dislike
 def dislike_post(request, post_text_id):
     this_post = Post.objects.get(id=post_text_id)
-    this_user = user.objects.get(id=request.session['uuid'])
+    this_user = User.objects.get(id=request.session['uuid'])
     this_post.liked_by.remove(this_user)
     return redirect(f'/dashboard/{post_text_id}')
 
