@@ -65,6 +65,9 @@ class RegisterManager(models.Manager):
 
 class Post(models.Model):
     post_text = models.CharField(max_length= 255)
+    artist_name= models.CharField(max_length= 255)
+    song_name= models.CharField(max_length= 255)
+    album_pic= models.CharField(max_length= 255)
     posted_by = models.ForeignKey('User', related_name ='post', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add= True)
     updated_at = models.DateTimeField(auto_now= True)
