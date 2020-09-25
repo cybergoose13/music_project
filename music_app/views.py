@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 import bcrypt
 from .models import *
@@ -117,7 +117,7 @@ def add_post(request):
             post_text = request.POST['post_text'],
             artist_name= request.POST['artist_name'],
             song_name= request.POST['song_name'],
-            # album_pic= songData['album_image'],
+            album_pic= songData['album_image'],
             posted_by = this_user,
         )
         print(share_your_idea.post_text)
@@ -150,5 +150,11 @@ def dislike_post(request, post_text_id):
 
 # This is the end of the URLS for REDIRECTING
 
-def passReset(request, user_id):
-    pass
+def passReset(request):
+    # not working...
+    User.objects.resetPassword(request.POST)
+    return HttpResponse('<h3>An email has been sent to ' + request.POST['user_email'] + '</h3>')
+
+
+def reset(request):
+    return render(request, 'resetpassword.html')

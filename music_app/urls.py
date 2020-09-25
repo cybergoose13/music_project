@@ -12,5 +12,6 @@ urlpatterns = [
 #     path('dashboard/dislikes/<int:post_text_id>', views.dislike_post),
     path('dashboard/newpost', views.add_post),
 #     path('dashboard/delete/<int:post_text_id>', views.delete_post),
-    path('reset/<int:user_id>', views.passReset)
+    path('passReset', views.passReset),
+    path('reset', views.reset)
 ]
