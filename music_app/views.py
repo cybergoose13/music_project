@@ -87,7 +87,6 @@ def login(request):
     
         else:
             # Check email in database
-            # user_list = User.objects.filter(email=request.POST['user_email'])
             user_list= User.objects.get(user_email= request.POST['user_email'])
             # setup user in session
             request.session['uuid'] = user_list.id
