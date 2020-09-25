@@ -16,13 +16,13 @@ class RegisterManager(models.Manager):
         errors= {}
         if len(postData) > 0:
             userName= postData['user_name']
-            userEmail= postData['user_email']
+            userEmail= postData['email']
             userPass= postData['user_pass']
-            passConfirm= postData['user_confirm']
-            firstName= postData['user_first']
-            lastName= postData['user_last']
+            passConfirm= postData['confirm_pass']
+            firstName= postData['first_name']
+            lastName= postData['last_name']
             EMAIL_REGEX= re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-            PASS_REGEXT= 'r^"(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$])[\w\d!@#$]{8,}$"'
+            PASS_REGEXT= ''
 
             
             if len(User.objects.filter(user_name= userName)) > 0:
@@ -38,7 +38,7 @@ class RegisterManager(models.Manager):
                 print('user email syntax error. . .')
                 errors['USER_EMAIL_FORMAT_ERROR']= 'Invalid email.'
             
-            if not re.match(PASS_REGEXT, userPass):
+            if not re.match(r'^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$])[\w\d!@#$]{8,}$', userPass):
                 print('password syntax error. . .')
                 errors['PASSWORD_FORM_ERROR']= 'Password must have atleast 1 lowercase 1 uppercase and special character.'
             if userPass != passConfirm:
@@ -64,11 +64,14 @@ class RegisterManager(models.Manager):
         return errors
 
 class Post(models.Model):
-    post= models.CharField(max_length= 255)
-    posted_by= models.ForeignKey('User', related_name='post', on_delete=models.CASCADE)
-    created_at= models.DateTimeField(auto_now_add= True)
-    updated_at= models.DateTimeField(auto_now= True)
-    objects= PostManager()
+    post_text = models.CharField(max_length= 255)
+    artist_name= models.CharField(max_length= 255)
+    song_name= models.CharField(max_length= 255)
+    album_pic= models.CharField(max_length= 255)
+    posted_by = models.ForeignKey('User', related_name ='post', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add= True)
+    updated_at = models.DateTimeField(auto_now= True)
+    objects = PostManager()
 
 class User(models.Model):
     first_name= models.CharField(max_length= 16)

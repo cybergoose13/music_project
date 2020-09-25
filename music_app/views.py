@@ -34,37 +34,39 @@ def dashboard(request):
 def register(request):
     print("Register function", request.POST)
     errors = User.objects.regValidation(request.POST)
-    
-    if len(errors) > 0:
-        print("There are errors with the registration")
-        for key, value in errors.items():
-            messages.error(request,value)
-            return redirect('/')
-        
-    else:
-        print("Registration successful")
-        #The following is to hash the password
-        hash_slinging_slasher = bcrypt.hashpw(
-            request.POST['password'].encode(),
-            bcrypt.gensalt()
-        ).decode()
-        # This is the end of the hash
-        print(f"Our hash: {hash_slinging_slasher}")
-        #Add user to database
-        
-        created_user = User.objects.create(
-            first_name = request.POST['first_name'],
-            last_name = request.POST['last_name'],
-            user_name = request.POST['user_name'],
-            user_email = request.POST['email'],
-            password = hash_slinging_slasher
-            # This will scramble the password and make it encrypted
-        )
-        print("Our newly registered user pass; ", created_user.password)
-        print(f"My newly created user's id is {created_user.id}")
-        # This will set us up in session
-        request.session['uuid'] = created_user.id
-        return redirect('/dashboard')
+    if len(request.POST) > 0:
+
+        if len(errors) > 0:
+            print("There are errors with the registration")
+            for key, value in errors.items():
+                messages.error(request,value)
+                return redirect('/')
+            
+        else:
+            print("Registration successful")
+            #The following is to hash the password
+            hash_slinging_slasher = bcrypt.hashpw(
+                request.POST['user_pass'].encode(),
+                bcrypt.gensalt()
+            ).decode()
+            # This is the end of the hash
+            print(f"Our hash: {hash_slinging_slasher}")
+            #Add user to database
+            
+            created_user = User.objects.create(
+                first_name = request.POST['first_name'],
+                last_name = request.POST['last_name'],
+                user_name = request.POST['user_name'],
+                user_email = request.POST['email'],
+                password = hash_slinging_slasher
+                # This will scramble the password and make it encrypted
+            )
+            print("Our newly registered user pass; ", created_user.password)
+            print(f"My newly created user's id is {created_user.id}")
+            # This will set us up in session
+            request.session['uuid'] = created_user.id
+            return redirect('/dashboard')
+    return render(request, 'register.html')
 
 # This will be for the logout
 def logout(request):
@@ -111,6 +113,9 @@ def add_post(request):
     this_user = User.objects.get(id=request.session['uuid'])
     share_your_idea = Post.objects.create(
         post_text = request.POST['post_text'],
+        artist_name= request.POST['artist_name'],
+        song_name= request.POST['song_name'],
+        album_pic= request.POST['album_pic'],
         posted_by = this_user,
     )
     return redirect('/dashboard')
