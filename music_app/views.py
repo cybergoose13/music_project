@@ -117,7 +117,7 @@ def add_post(request):
             post_text = request.POST['post_text'],
             artist_name= request.POST['artist_name'],
             song_name= request.POST['song_name'],
-            album_pic= songData['album_image'],
+            # album_pic= songData['album_image'],
             posted_by = this_user,
         )
         print(share_your_idea.post_text)
