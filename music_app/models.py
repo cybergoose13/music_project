@@ -31,6 +31,7 @@ class PostManager(models.Manager):
                     songData['album_image']= track['album']['images'][0]['url']
                     songData['artist_name']= artist
                     songData['song_name']= song
+                    break
 
         return errors, songData
 

@@ -17,6 +17,25 @@
     <script rel="stylesheet" href="{%static '/js/music.js' %}"></script>
 </head>
 <body>
-    
+    <div>
+        <table>
+            <thead>
+                <th>Poster</th>
+                <th>Album</th>
+                <th>Artist</th>
+                <th>Song</th>
+            </thead>
+            <tbody>
+                {% for song in songData %}
+                <tr>
+                    <td>{{song.posted_by.first_name|title}} {{song.posted_by.last_name|title}}</td>
+                    <td><img src={{song.album_pic}}></td>
+                    <td>{{song.artist_name|title}}</td>
+                    <td>{{song.song_name|title}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

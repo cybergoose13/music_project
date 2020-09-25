@@ -21,6 +21,7 @@ def dashboard(request):
     context = {
         'user_object' : this_user,
         'every_users_post' : every_users_post,
+        'songData': Post.objects.all()
     }
     
     return render(request,'dashboard.html', context)
@@ -135,7 +136,7 @@ def likes(request, post_text_id):
 def all_posts(request, post_text_id):
     context = {
         'this_post': Post.objects.get(id=post_text_id),
-        'this_user' : User.objects.get(id = request.session['uuid']),
+        'this_user': User.objects.get(id = request.session['uuid'])
     }
     return render (request, 'dashboard.html', context)
 
