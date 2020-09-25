@@ -13,10 +13,26 @@ class PostManager(models.Manager):
         CLIENT_SECRET= '544cb114d54e47da8a6bedd7a412fb7f'
         auth_manager= SpotifyClientCredentials(CLIENT_ID, CLIENT_SECRET)
         sp= spotipy.Spotify(auth_manager= auth_manager)
+        
+        artist= postData['artist_name'].title()
+        song= postData['song_name'].title()
+        result= sp.search(q=song, limit=20)
+
+        songData = {}
         errors= {}
-        if len(postData) > 0:
-            
-            return errors
+
+        if len(result['tracks']['items']) < 1:
+            errors['QUERY_ERROR']= 'No song or artist was found.'
+        else:
+            for idx, track in enumerate(result['tracks']['items']):
+                print(idx,track['name'],track['artists'][0]['name'], track['album']['images'][0]['url'])
+                if track['artists'][0]['name'] == artist:
+                    print('Match was found')
+                    songData['album_image']= track['album']['images'][0]['url']
+                    songData['artist_name']= artist
+                    songData['song_name']= song
+
+        return errors, songData
 
 class RegisterManager(models.Manager):
     def regValidation(self, postData):

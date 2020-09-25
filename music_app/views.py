@@ -103,22 +103,24 @@ def delete_post(request, post_text_id):
 
 # This is to be able to add posts
 def add_post(request):
-    errors = Post.objects.postValidation(request.POST)
     # Validate
-    if len(errors) > 0:
-        print("Something went wrong when adding this post")
-        for key, value in errors.items():
-            messages.error(request, value)
-        return redirect(f'/dashboard')
-    this_user = User.objects.get(id=request.session['uuid'])
-    share_your_idea = Post.objects.create(
-        post_text = request.POST['post_text'],
-        artist_name= request.POST['artist_name'],
-        song_name= request.POST['song_name'],
-        album_pic= request.POST['album_pic'],
-        posted_by = this_user,
-    )
-    return redirect('/dashboard')
+    if len(request.POST) > 0:
+        errors, songData = Post.objects.postValidation(request.POST)
+        if len(errors) > 0:
+            print("Something went wrong when adding this post")
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect(f'/dashboard')
+        this_user = User.objects.get(id=request.session['uuid'])
+        share_your_idea = Post.objects.create(
+            post_text = request.POST['post_text'],
+            artist_name= request.POST['artist_name'],
+            song_name= request.POST['song_name'],
+            album_pic= songData['album_image'],
+            posted_by = this_user,
+        )
+        return redirect('/dashboard')
+    return render(request,'post.html')
 
 # This is to be able to like posts
 def likes(request, post_text_id):

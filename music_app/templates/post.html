@@ -6,6 +6,18 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <form action="dashboard/newpost" method="POST">
+        {%csrf_token%}
+        <div>
+            <label for="post_text">Post Text</label><input type="text" name="post_text" required>
+        </div>
+        <div>
+            <label for="artist_name">Artist</label><input type="text" name="artist_name" required>
+        </div>
+        <div>
+            <label for="song_name">Song name</label><input type="text" name="song_name" required>
+        </div>
+        <input type="submit" value="press me">
+    </form>
 </body>
 </html>
