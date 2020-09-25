@@ -20,14 +20,23 @@
     <div class="main">
         <div class="login">
             <div class="innerlogin">
-                <h1 class="text-danger">Login</h1>
+                <h1 class="text-danger">LOGIN</h1>
                 <img src="{% static 'css/hotwiredlogo.png'%}" alt="picture">
                 <form action="login" method="POST" class="shadow-lg p-3 mb-5 bg-white rounded">
                     {% csrf_token %}
                     <p><input type="text" name="user_email" id="" placeholder="Email" required></p>
                     <p><input type="user_pass" name="user_pass" id="" placeholder="Password" required></p>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                        <label class="form-check-label" for="dropdownCheck">
+                          Remember me
+                        </label>
+                      </div>
                     <button type="submit" value="action" class="btn btn-danger">Login</button>
-                    <a href="/register"><button type="button" class="btn btn-danger">Register</button></a>
+                    <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-primary" href="/register">New around here? Sign up</a>
+                        <a class="dropdown-item text-primary" href="#">Forgot password?</a>
+                    </div>
                 </form>
 
                 <ul>
