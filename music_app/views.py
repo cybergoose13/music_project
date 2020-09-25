@@ -119,6 +119,7 @@ def add_post(request):
             album_pic= songData['album_image'],
             posted_by = this_user,
         )
+        print(share_your_idea.post_text)
         return redirect('/dashboard')
     return render(request,'post.html')
 
